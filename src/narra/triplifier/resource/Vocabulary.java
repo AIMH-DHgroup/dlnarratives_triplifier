@@ -48,12 +48,12 @@ public class Vocabulary {
 		propPredicate, Proposition, holdsBelief, hasEntity, isEntityOf, hasDescription, isAboutCountry, isAboutLAU, isPresentedBefore, isPresentedAfter,
 		// NICO ADD isAboutCountry, isAboutLAU 
 		// Equivalent classes to CIDOC CRM classes
-		Appellation, Activity, Creation, Actor, Place, Physical_Thing, Information_Object, Persistent_Item, Space_primitive, Visual_Item, Time_Span { public String toString() { return "Time-Span"; }},
-		Person, Birth, Physical_Object, Propositional_Object, Death, Joining, Leaving,
+		Entity, Appellation, Activity, Creation, Actor, Place, Physical_Thing, Information_Object, Persistent_Item, Space_primitive, Visual_Item, Time_Span { public String toString() { return "Time-Span"; }},
+		Person, Birth, Physical_Object, Propositional_Object, Death, Joining, Leaving, Period,
 		// Equivalent classes to CRMinf classes
 		Observable_Entity, Observation, Belief, Inference_Making, Proposition_Set,
 		// Equivalent classes to EFRBRoo classes
-		Expression_Fragment,
+		Expression_Fragment, Individual_Work,
 		// Equivalent class to CRMgeo class
 		Phenomenal_Place, Spatial_Coordinate_Reference_System, Geometric_Place_Expression
 	}

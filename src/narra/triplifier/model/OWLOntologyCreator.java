@@ -96,25 +96,25 @@ public class OWLOntologyCreator {
 			*/
 
 			// CIDOC CRM classes
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E41_Appellation.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E7_Activity.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E65_Creation.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E39_Actor.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E53_Place.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E18_Physical_Thing.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E77_Persistent_Item.toString(), null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E94_Space_primitive.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E36_Visual_Item.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E52_Time_Span.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E21_Person.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E67_Birth.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E19_Physical_Object.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E89_Propositional_Object.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E69_Death.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E85_Joining.toString(),null);
-			createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E86_Leaving.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E41_Appellation.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E7_Activity.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E65_Creation.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E39_Actor.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E53_Place.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E18_Physical_Thing.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E77_Persistent_Item.toString(), null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E94_Space_primitive.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E36_Visual_Item.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E52_Time_Span.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E21_Person.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E67_Birth.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E19_Physical_Object.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E89_Propositional_Object.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E69_Death.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E85_Joining.toString(),null);
+			// createClassWithDescription(Vocabulary.ecrm + Vocabulary.ecrmNames.E86_Leaving.toString(),null);
 
 			// Equivalent narra classes of CIDOC CRM classes
 			createClassWithDescription(Vocabulary.narra + Vocabulary.narraNames.Appellation.toString(), null);
@@ -187,26 +187,26 @@ public class OWLOntologyCreator {
 			addEquivalentClassAxiom(Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment.toString(), Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment.toString());
 
 			// GEOSPARQL classes
-			createClassWithDescription(Vocabulary.geo + Vocabulary.geoNames.SpatialObject.toString(), "The class Spatial Object represents everything that can have a spatial representation. It is superclass of feature  and geometry");
+			// createClassWithDescription(Vocabulary.geo + Vocabulary.geoNames.SpatialObject.toString(), "The class Spatial Object represents everything that can have a spatial representation. It is superclass of feature  and geometry");
 
-			createClassWithDescriptionAndSuperclass(
-				Vocabulary.geo + Vocabulary.geoNames.Feature.toString(),
-				"This class represents the top-level feature type. This class is equivalent to GFI_Feature defined in ISO 19156, and it is superclass of all feature types.",
-				Vocabulary.geo + Vocabulary.geoNames.SpatialObject.toString()
-			);
+			// createClassWithDescriptionAndSuperclass(
+			// 	Vocabulary.geo + Vocabulary.geoNames.Feature.toString(),
+			// 	"This class represents the top-level feature type. This class is equivalent to GFI_Feature defined in ISO 19156, and it is superclass of all feature types.",
+			// 	Vocabulary.geo + Vocabulary.geoNames.SpatialObject.toString()
+			// );
 
-			createClassWithDescriptionAndSuperclass(
-				Vocabulary.geo + Vocabulary.geoNames.Geometry.toString(),
-				"The class represents the top-level geometry type. This class is equivalent to the UML class GM_Object defined in ISO 19107, and it is superclass of all geometry types.",
-				Vocabulary.geo + Vocabulary.geoNames.SpatialObject.toString()
-			);
+			// createClassWithDescriptionAndSuperclass(
+			// 	Vocabulary.geo + Vocabulary.geoNames.Geometry.toString(),
+			// 	"The class represents the top-level geometry type. This class is equivalent to the UML class GM_Object defined in ISO 19107, and it is superclass of all geometry types.",
+			// 	Vocabulary.geo + Vocabulary.geoNames.SpatialObject.toString()
+			// );
 			
 			// Classes Narrrative Ontology
 			// Class narra:Narrative
 			createClassWithDescriptionAndSuperclass(
 				Vocabulary.narra + Vocabulary.narraNames.Narrative.toString(),
 				"This class represents a narrative.",
-				Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object.toString()
+				Vocabulary.narra + Vocabulary.narraNames.Information_Object.toString()
 			);
 			
 			// Class narra:Event
@@ -220,14 +220,14 @@ public class OWLOntologyCreator {
 			createClassWithDescriptionAndSuperclass(
 				Vocabulary.narra + Vocabulary.narraNames.Fabula.toString(),
 				"This class represents the fabula of a narrative, i.e. the sequence of events in chronological order.",
-				Vocabulary.ecrm + Vocabulary.ecrmNames.E4_Period.toString()
+				Vocabulary.narra + Vocabulary.narraNames.Period.toString()
 			);
 			
 			// Class narra:Narration
 			createClassWithDescriptionAndSuperclass(
 				Vocabulary.narra + Vocabulary.narraNames.Narration.toString(),
 				"This class represents the narration of a narrative, i.e. an individual work that tells the events of the narrative through some form of media (text, video, audio, etc.).",
-				Vocabulary.efrbroo + Vocabulary.efrbrooNames.F14_Individual_Work.toString()
+				Vocabulary.narra + Vocabulary.narraNames.Individual_Work.toString()
 			);
 			
 			// Class narra:Biography
@@ -244,14 +244,14 @@ public class OWLOntologyCreator {
 				+ "Through the property hadParticipant an event is related with this class."
 				+ "ActorWithRole is related with the class Actor through the property hasSubject"
 				+ "and to a literal that represents the role through the property hasRole.",
-				Vocabulary.ecrm + Vocabulary.ecrmNames.E1_CRM_Entity.toString()
+				Vocabulary.narra + Vocabulary.narraNames.Entity.toString()
 			);
 			
 			// Class narra:Role
 			createClassWithDescriptionAndSuperclass(
 				Vocabulary.narra + Vocabulary.narraNames.Role.toString(),
 				"This class represents a role in the event.",
-				Vocabulary.ecrm + Vocabulary.ecrmNames.E1_CRM_Entity.toString()
+				Vocabulary.narra + Vocabulary.narraNames.Entity.toString()
 			);
 
 			// Class crmgeo:SP2_Phenomenal_Place
