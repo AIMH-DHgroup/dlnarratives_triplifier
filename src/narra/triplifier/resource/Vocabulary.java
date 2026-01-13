@@ -45,11 +45,14 @@ public class Vocabulary {
 		ActorWithRole, hadParticipant, hasSubject, hasRole, Event, hasSource, hasBibliographicReference, hasTextFragment,
 		hasReference, causallyDependsOn, numBook, numChapter, instantEquals, timeSpanStartedBy, timeSpanFinishedBy,
 		hasFabula, hasEvent, hasText, Narrative, Narration, Biography, Fabula, partOfNarrative, Role, propSubject, propObject,
-		propPredicate, Proposition, holdsBelief, hasEntity, isEntityOf, hasDescription, isAboutCountry, isAboutLAU, isPresentedBefore, isPresentedAfter,
+		propPredicate, Proposition, holdsBelief, hasEntity, isEntityOf, hasDescription, isAboutCountry, isAboutLAU, isPresentedBefore, isPresentedAfter, is_about,
 		// NICO ADD isAboutCountry, isAboutLAU 
 		// Equivalent classes to CIDOC CRM classes
 		Entity, Appellation, Activity, Creation, Actor, Place, Physical_Thing, Information_Object, Persistent_Item, Space_primitive, Visual_Item, Time_Span { public String toString() { return "Time-Span"; }},
 		Person, Birth, Physical_Object, Propositional_Object, Death, Joining, Leaving, Period,
+		// Equivalent properties to CIDOC CRM properties
+		is_identified_by, has_time_span { public String toString() { return "has_time-span"; }}, carried_out_by, took_place_at, occurred_in_the_presence_of, refers_to, has_created, is_composed_of, consists_of, has_preferred_identifier, has_note,
+		// NICO ADD has_spatial_projection
 		// Equivalent classes to CRMinf classes
 		Observable_Entity, Observation, Belief, Inference_Making, Proposition_Set,
 		// Equivalent classes to EFRBRoo classes

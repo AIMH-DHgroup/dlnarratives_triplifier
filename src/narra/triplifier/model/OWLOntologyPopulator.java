@@ -195,13 +195,13 @@ public class OWLOntologyPopulator {
 			addDataPropertyAssertion(model, resource_Narrator, RDFS.label.toString(), narrative.getAuthor(), null);
 						
 			// Add relations between creation event, narrator and narrative 
-			addObjectPropertyAssertion(model, resource_NarrativeCreationEvent, Vocabulary.ecrm+Vocabulary.ecrmNames.P14_carried_out_by.toString(), resource_Narrator,
-					new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E5_Event, Vocabulary.ecrm+Vocabulary.ecrmNames.E39_Actor});
-			addObjectPropertyAssertion(model, resource_NarrativeCreationEvent, Vocabulary.ecrm+Vocabulary.ecrmNames.P94_has_created.toString(), resource_Narrative, 
+			addObjectPropertyAssertion(model, resource_NarrativeCreationEvent, Vocabulary.narra + Vocabulary.narraNames.carried_out_by.toString(), resource_Narrator,
+					new String[]{Vocabulary.narra + Vocabulary.narraNames.Event, Vocabulary.narra + Vocabulary.narraNames.Actor});
+			addObjectPropertyAssertion(model, resource_NarrativeCreationEvent, Vocabulary.narra + Vocabulary.narraNames.has_created.toString(), resource_Narrative, 
 					new String[]{null, resource_NarrativeType});
 			
 			// Add relation between narrative and visualization (storymap/timeline) link
-			addObjectPropertyAssertion(model, resource_Narrative, Vocabulary.ecrm+Vocabulary.ecrmNames.P48_has_preferred_identifier.toString(), "https://tool.dlnarratives.eu/storymaps/" + narrative.getAuthor() + "/" + narraID + "/",
+			addObjectPropertyAssertion(model, resource_Narrative, Vocabulary.narra + Vocabulary.narraNames.has_preferred_identifier.toString(), "https://tool.dlnarratives.eu/storymaps/" + narrative.getAuthor() + "/" + narraID + "/",
 			//addObjectPropertyAssertion(model, resource_Narrative, Vocabulary.ecrm+Vocabulary.ecrmNames.P48_has_preferred_identifier.toString(), "https://tool.dlnarratives.eu/verticalstorymap3D/violtwin.php?user=adminNarra.1&id=" + narraID ,
 					new String[]{null, null});
 			
@@ -218,7 +218,7 @@ public class OWLOntologyPopulator {
 				
 				addObjectPropertyAssertion(model, eventURI, 
 						Vocabulary.narra + Vocabulary.narraNames.partOfNarrative.toString(), 
-						resource_Narrative, new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E5_Event.toString(),Vocabulary.narra + Vocabulary.narraNames.Narrative.toString()});
+						resource_Narrative, new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.narra + Vocabulary.narraNames.Narrative.toString()});
 				
 								
 				// Log event number and URI
@@ -294,8 +294,8 @@ public class OWLOntologyPopulator {
 			            for (String element : arrayOfMedia) {
 			            	
 							addObjectPropertyAssertion(model, element, 
-									Vocabulary.ecrm+Vocabulary.ecrmNames.P67_refers_to.toString(), 
-									eventURI, new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object,eventTypeURI});
+									Vocabulary.narra + Vocabulary.narraNames.refers_to.toString(), 
+									eventURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Information_Object,eventTypeURI});
 			            
 			            }
 					
@@ -303,25 +303,25 @@ public class OWLOntologyPopulator {
 					} else {
 					
 						addObjectPropertyAssertion(model, eventMedia, 
-								Vocabulary.ecrm+Vocabulary.ecrmNames.P67_refers_to.toString(), 
-								eventURI, new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object,eventTypeURI});
+								Vocabulary.narra + Vocabulary.narraNames.refers_to.toString(), 
+								eventURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Information_Object,eventTypeURI});
 					}
 				}
 				
 				// Add 3D Model to Model
 				if(!eventId3DModel.isEmpty()) {
 					addObjectPropertyAssertion(model, Vocabulary.base  + "3DModel/" + eventId3DModel + "_" + eventAnnotation3DModel, 
-							Vocabulary.ecrm+Vocabulary.ecrmNames.P67_refers_to.toString(), 
-							eventURI, new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E36_Visual_Item,eventTypeURI});
+							Vocabulary.narra + Vocabulary.narraNames.refers_to.toString(), 
+							eventURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Visual_Item,eventTypeURI});
 				}
 				
 				// add latitude and longitude to Model
 				if(!eventLatitude.isEmpty() && !eventLongitude.isEmpty()) {
 					
 					// add the triple E5 Event, P7_took_place_at, SP2 Phenomenal Place
-					addObjectPropertyAssertion(model, eventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P7_took_place_at.toString(),
+					addObjectPropertyAssertion(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.took_place_at.toString(),
 					Vocabulary.base  + "phenomenal_place/" + eventLatitude + "_" + eventLongitude, 
-					new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
+					new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
 			
 					// add the triple SP5_Geometric_Place_Expression, Q9_is_expressed_in_terms_of, SP4_Spatial_Coordinate_Reference_System
 					addObjectPropertyAssertion(model, Vocabulary.base  + "place/" + eventLatitude + "_" + eventLongitude, 
@@ -387,7 +387,7 @@ public class OWLOntologyPopulator {
 				
 				// Event type must be a subclass of ecrm:E5_Event
 				OWLSubClassOfAxiom subClassAxiom = dataFactory.getOWLSubClassOfAxiom(dataFactory.getOWLClass(eventTypeURI),
-						dataFactory.getOWLClass(Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event));
+						dataFactory.getOWLClass(Vocabulary.narra + Vocabulary.narraNames.Event));
 				AddAxiom addAxiomChange = new AddAxiom(model, subClassAxiom);
 				model.applyChange(addAxiomChange);
 
@@ -395,7 +395,7 @@ public class OWLOntologyPopulator {
 				// and create literal for event title and for start/end dates
 				for (int i = 0; i < eventPartOf.size(); i++) {
 					addObjectPropertyAssertion(model, Vocabulary.base + "narrative/" + narraID + "/event/" + eventPartOf.get(i), 
-							Vocabulary.ecrmNames.P9_consists_of.toString(), 
+							Vocabulary.narra + Vocabulary.narraNames.consists_of.toString(), 
 							eventURI, new String[]{null,eventTypeURI});
 				}
 				
@@ -411,15 +411,15 @@ public class OWLOntologyPopulator {
 					for (String digObjURI: digObjsURI) {
 						log.debug(digObjURI);
 						addObjectPropertyAssertion(model, digObjURI, 
-								Vocabulary.ecrm+Vocabulary.ecrmNames.P67_refers_to.toString(), 
-								eventURI, new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object,eventTypeURI});	
+								Vocabulary.narra + Vocabulary.narraNames.refers_to.toString(), 
+								eventURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Information_Object,eventTypeURI});	
 					}
 				}
 
 				// Add event notes and link them to event
 				if (eventNotes != null && !eventNotes.equals("")) {
 					//log.info(eventNotes);
-					addDataStringPropertyAssertions(model, eventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), eventNotes, 
+					addDataStringPropertyAssertions(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), eventNotes, 
 							eventTypeURI);
 				}
 				
@@ -431,7 +431,7 @@ public class OWLOntologyPopulator {
 				if(!startDate.isEmpty()) {
 				
 					String timeSpan = Vocabulary.base + "time/" + startDate + "-" + endDate;
-					String timeSpanType = Vocabulary.time + Vocabulary.ecrmNames.E52_Time_Span;
+					String timeSpanType = Vocabulary.narra + Vocabulary.narraNames.Time_Span;
 					String instantType = Vocabulary.time + Vocabulary.timeNames.Instant;
 					
 					// Create beginning/end instants for time span, and add relations between time instants and date literals
@@ -449,19 +449,19 @@ public class OWLOntologyPopulator {
 				
 				
 					// Add relations between event and time span
-					addObjectPropertyAssertion(model, eventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P4_has_time_span.toString(), 
+					addObjectPropertyAssertion(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.has_time_span.toString(), 
 							timeSpan, new String[]{eventTypeURI, timeSpanType});
 				
 				}
 
 				// Add relations between event, title resource and title literal
-				addObjectPropertyAssertion(model, eventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), 
-						eventTitleURI, new String[]{eventTypeURI, Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation});
-				addDataPropertyAssertion(model, eventTitleURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), 
+				addObjectPropertyAssertion(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), 
+						eventTitleURI, new String[]{eventTypeURI, Vocabulary.narra + Vocabulary.narraNames.Appellation});
+				addDataPropertyAssertion(model, eventTitleURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), 
 						eventTitle, new String[]{null, XSDVocabulary.STRING.getIRI().toString()});
 				
 				// Add type ecrm:E5_Event explicitly
-				addObjectPropertyAssertion(model, eventURI, RDF.TYPE.toString(), Vocabulary.ecrm+Vocabulary.ecrmNames.E5_Event.toString(), new String[]{null,null});
+				addObjectPropertyAssertion(model, eventURI, RDF.TYPE.toString(), Vocabulary.narra + Vocabulary.narraNames.Event.toString(), new String[]{null,null});
 
 				try {
 					// For each proposition...
@@ -503,12 +503,12 @@ public class OWLOntologyPopulator {
 						String resourceType = wikiResource.getType();
 
 						if (propositionNotes != null) {
-							addDataPropertyAssertion(model, propositionURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), 
+							addDataPropertyAssertion(model, propositionURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), 
 									propositionNotes, new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, XSDVocabulary.STRING.getIRI().toString()});
 						}
 
 						addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propSubject.toString(), eventURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, eventTypeURI});
-						addObjectPropertyAssertion(model, propositionSetURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P106_is_composed_of.toString(), propositionURI, 
+						addObjectPropertyAssertion(model, propositionSetURI, Vocabulary.narra + Vocabulary.narraNames.is_composed_of.toString(), propositionURI, 
 								new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I4_Proposition_Set, Vocabulary.narra + Vocabulary.narraNames.Proposition});
 						addObjectPropertyAssertion(model, propositionBeliefURI, Vocabulary.crminf+Vocabulary.crminfNames.J4_that.toString(), propositionSetURI,
 								new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I2_Belief, null});
@@ -528,9 +528,9 @@ public class OWLOntologyPopulator {
 							addDataPropertyAssertion(model, personWithRole.getURI(), RDFS.label.toString(), personWithRole.getName(), new String[]{null, null});
 							addDataPropertyAssertion(model, personWithRole.getURI(), RDFS.comment.toString(), personWithRole.getDescription(), new String[]{null, null});
 							
-							addObjectPropertyAssertion(model, personWithRole.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), actorAppellationURI, new String[]{null, null});
-							addDataPropertyAssertion(model, actorAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), personWithRole.getName(), 
-									new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
+							addObjectPropertyAssertion(model, personWithRole.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), actorAppellationURI, new String[]{null, null});
+							addDataPropertyAssertion(model, actorAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), personWithRole.getName(), 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
 
 							String role = personWithRole.getRole();
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra + Vocabulary.narraNames.propPredicate.toString(), Vocabulary.narra+Vocabulary.narraNames.hadParticipant.toString(), 
@@ -548,11 +548,11 @@ public class OWLOntologyPopulator {
 							
 							
 							if (resourceType == "person") {
-								addObjectPropertyAssertion(model, personWithRole.getURI(), RDF.TYPE.toString(), Vocabulary.ecrm + Vocabulary.ecrmNames.E21_Person, new String[]{null,null});
+								addObjectPropertyAssertion(model, personWithRole.getURI(), RDF.TYPE.toString(), Vocabulary.narra + Vocabulary.narraNames.Person, new String[]{null,null});
 							}
 							
 							addObjectPropertyAssertion(model, personWithRole.getURI(), Vocabulary.narra+Vocabulary.narraNames.hasSubject.toString(), personWithRole.getPersonURI(),
-									new String[]{Vocabulary.narra + Vocabulary.narraNames.ActorWithRole, Vocabulary.ecrm + Vocabulary.ecrmNames.E39_Actor});
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.ActorWithRole, Vocabulary.narra + Vocabulary.narraNames.Actor});
 							
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propObject.toString(), personWithRole.getURI(), new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, null});
 
@@ -568,14 +568,14 @@ public class OWLOntologyPopulator {
 							addDataPropertyAssertion(model, object.getURI(), RDFS.label.toString(), object.getName(), new String[]{null, null});
 							addDataPropertyAssertion(model, object.getURI(), RDFS.comment.toString(), object.getDescription(), new String[]{null, null});
 							
-							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), objectAppellationURI, 
-									new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E19_Physical_Object, null});
-							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), object.getName(), 
-									new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
-							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.ecrm+Vocabulary.ecrmNames.P12_occurred_in_the_presence_of.toString(), 
+							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), objectAppellationURI, 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Physical_Object, null});
+							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), object.getName(), 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
+							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.narra + Vocabulary.narraNames.occurred_in_the_presence_of.toString(), 
 									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, null});
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propObject.toString(), object.getURI(), 
-									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.ecrm + Vocabulary.ecrmNames.E19_Physical_Object});
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.narra + Vocabulary.narraNames.Physical_Object});
 							
 							
 							
@@ -592,14 +592,14 @@ public class OWLOntologyPopulator {
 							addDataPropertyAssertion(model, object.getURI(), RDFS.label.toString(), object.getName(), new String[]{null, null});
 							addDataPropertyAssertion(model, object.getURI(), RDFS.comment.toString(), object.getDescription(), new String[]{null, null});
 
-							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), objectAppellationURI, 
-									new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E89_Propositional_Object, null});
-							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), object.getName(), 
-									new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
-							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.ecrm+Vocabulary.ecrmNames.P12_occurred_in_the_presence_of.toString(), 
+							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), objectAppellationURI, 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Propositional_Object, null});
+							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), object.getName(), 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
+							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.narra + Vocabulary.narraNames.occurred_in_the_presence_of.toString(), 
 									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, null});
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propObject.toString(), object.getURI(), 
-									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.ecrm + Vocabulary.ecrmNames.E89_Propositional_Object});
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.narra + Vocabulary.narraNames.Propositional_Object});
 						
 						
 						
@@ -617,14 +617,14 @@ public class OWLOntologyPopulator {
 							addDataPropertyAssertion(model, object.getURI(), RDFS.label.toString(), object.getTitle(), new String[]{null, null});
 							addDataPropertyAssertion(model, object.getURI(), RDFS.comment.toString(), object.getDescription(), new String[]{null, null});
 
-							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), objectAppellationURI, 
-									new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object, null});
-							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), object.getTitle(), 
-									new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
-							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.ecrm+Vocabulary.ecrmNames.P12_occurred_in_the_presence_of.toString(), 
+							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), objectAppellationURI, 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Information_Object, null});
+							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), object.getTitle(), 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
+							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.narra + Vocabulary.narraNames.occurred_in_the_presence_of.toString(), 
 									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, null});
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propObject.toString(), object.getURI(), 
-									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object});
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.narra + Vocabulary.narraNames.Information_Object});
 						
 						
 							addObjectPropertyAssertion(model, eventURI, Vocabulary.narra+Vocabulary.narraNames.hasEntity.toString(), object.getURI(), new String[]{null, null});
@@ -641,14 +641,14 @@ public class OWLOntologyPopulator {
 							addDataPropertyAssertion(model, place.getURI(), RDFS.label.toString(), place.getName(), new String[]{null, null});
 							addDataPropertyAssertion(model, place.getURI(), RDFS.comment.toString(), place.getDescription(), new String[]{null, null});
 
-							addObjectPropertyAssertion(model, place.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), objectAppellationURI, 
-									new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E53_Place, null});
-							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), place.getName(), 
-									new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
-							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.ecrm+Vocabulary.ecrmNames.P7_took_place_at.toString(), 
+							addObjectPropertyAssertion(model, place.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), objectAppellationURI, 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Place, null});
+							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), place.getName(), 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
+							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.narra + Vocabulary.narraNames.took_place_at.toString(), 
 									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, null});
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propObject.toString(), place.getURI(), 
-									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.ecrm + Vocabulary.ecrmNames.E53_Place});
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.narra + Vocabulary.narraNames.Place});
 						
 						
 						
@@ -666,14 +666,14 @@ public class OWLOntologyPopulator {
 							addDataPropertyAssertion(model, object.getURI(), RDFS.label.toString(), object.getName(), new String[]{null, null});
 							addDataPropertyAssertion(model, object.getURI(), RDFS.comment.toString(), object.getDescription(), new String[]{null, null});
 
-							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), objectAppellationURI, 
-									new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E89_Propositional_Object, null});
-							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), object.getName(), 
-									new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
-							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.ecrm+Vocabulary.ecrmNames.P12_occurred_in_the_presence_of.toString(), 
+							addObjectPropertyAssertion(model, object.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), objectAppellationURI, 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Propositional_Object, null});
+							addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), object.getName(), 
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
+							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propPredicate.toString(), Vocabulary.narra + Vocabulary.narraNames.occurred_in_the_presence_of.toString(), 
 									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, null});
 							addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propObject.toString(), object.getURI(), 
-									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.ecrm + Vocabulary.ecrmNames.E89_Propositional_Object});
+									new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, Vocabulary.narra + Vocabulary.narraNames.Propositional_Object});
 						
 						
 							addObjectPropertyAssertion(model, eventURI, Vocabulary.narra+Vocabulary.narraNames.hasEntity.toString(), object.getURI(), new String[]{null, null});
@@ -701,23 +701,23 @@ public class OWLOntologyPopulator {
 									String sourceAppellationURI = sourceURI + "/appellation";
 									String sourceCreationEventURI = sourceURI + "/creation";
 
-									addObjectPropertyAssertion(model, source.getAuthor().getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), 
-											sourceAuthorAppellationURI, new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E39_Actor, Vocabulary.ecrm + Vocabulary.ecrmNames.E41_Appellation});
+									addObjectPropertyAssertion(model, source.getAuthor().getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), 
+											sourceAuthorAppellationURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Actor, Vocabulary.narra + Vocabulary.narraNames.Appellation});
 									
-									addDataPropertyAssertion(model, sourceAuthorAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(),
-											source.getAuthor().getName(), new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
+									addDataPropertyAssertion(model, sourceAuthorAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(),
+											source.getAuthor().getName(), new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
 									
-									addObjectPropertyAssertion(model, sourceURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), sourceAppellationURI, 
-											new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object, Vocabulary.ecrm + Vocabulary.ecrmNames.E41_Appellation});
+									addObjectPropertyAssertion(model, sourceURI, Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), sourceAppellationURI, 
+											new String[]{Vocabulary.narra + Vocabulary.narraNames.Information_Object, Vocabulary.narra + Vocabulary.narraNames.Appellation});
 									
-									addDataPropertyAssertion(model, sourceAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), 
-											source.getTitle(), new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
+									addDataPropertyAssertion(model, sourceAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), 
+											source.getTitle(), new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
 									
-									addObjectPropertyAssertion(model, sourceCreationEventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P94_has_created.toString(), sourceURI, 
-											new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event, Vocabulary.ecrm + Vocabulary.ecrmNames.E73_Information_Object});
+									addObjectPropertyAssertion(model, sourceCreationEventURI, Vocabulary.narra + Vocabulary.narraNames.has_created.toString(), sourceURI, 
+											new String[]{Vocabulary.narra + Vocabulary.narraNames.Event, Vocabulary.narra + Vocabulary.narraNames.Information_Object});
 									
-									addObjectPropertyAssertion(model, sourceCreationEventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P14_carried_out_by.toString(), 
-											source.getAuthor().getURI(), new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event, Vocabulary.ecrm + Vocabulary.ecrmNames.E39_Actor});
+									addObjectPropertyAssertion(model, sourceCreationEventURI, Vocabulary.narra + Vocabulary.narraNames.carried_out_by.toString(), 
+											source.getAuthor().getURI(), new String[]{Vocabulary.narra + Vocabulary.narraNames.Event, Vocabulary.narra + Vocabulary.narraNames.Actor});
 
 									// If source is primary...
 									if (source.getSourceType() == "primary") {
@@ -744,7 +744,7 @@ public class OWLOntologyPopulator {
 									
 									addObjectPropertyAssertion(model, observationURI, Vocabulary.crmsci+Vocabulary.crmsciNames.O8_observed.toString(), sourceURI, new String[]{null, null});
 
-									addObjectPropertyAssertion(model, observationURI, Vocabulary.crminf+Vocabulary.ecrmNames.P14_carried_out_by.toString(), resource_Narrator, new String[]{null, null});
+									addObjectPropertyAssertion(model, observationURI, Vocabulary.narra + Vocabulary.narraNames.carried_out_by.toString(), resource_Narrator, new String[]{null, null});
 
 									addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.hasSource.toString(), sourceURI, new String[]{null, null});
 
@@ -765,13 +765,13 @@ public class OWLOntologyPopulator {
 												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, null});
 										addDataPropertyAssertion(model, textFragmentURI, DC.FORMAT.toString(), "text/plain",
 												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, XSDVocabulary.STRING.getIRI().toString()});										
-										addObjectPropertyAssertion(model, sourceURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P106_is_composed_of.toString(), textFragmentURI, new String[]{null, null});
+										addObjectPropertyAssertion(model, sourceURI, Vocabulary.narra + Vocabulary.narraNames.is_composed_of.toString(), textFragmentURI, new String[]{null, null});
 										
 										// If source is secondary...
 										if (source.getSourceType() == "secondary") {
 											
 											// Add relation between text fragment and its corresponding proposition
-											addObjectPropertyAssertion(model, textFragmentURI, Vocabulary.ecrm + Vocabulary.ecrmNames.P129_is_about, propositionURI, new String[]{null, null});
+											addObjectPropertyAssertion(model, textFragmentURI, Vocabulary.narra + Vocabulary.narraNames.is_about, propositionURI, new String[]{null, null});
 										}
 										
 										// If source is primary...
@@ -824,10 +824,10 @@ public class OWLOntologyPopulator {
 						addDataPropertyAssertion(model, place.getURI(), RDFS.label.toString(), place.getName(), new String[]{null, null});
 						addDataPropertyAssertion(model, place.getURI(), RDFS.comment.toString(), place.getDescription(), new String[]{null, null});
 
-						addObjectPropertyAssertion(model, place.getURI(), Vocabulary.ecrm+Vocabulary.ecrmNames.P1_is_identified_by.toString(), objectAppellationURI, 
-								new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E53_Place, null});
-						addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P3_has_note.toString(), place.getName(), 
-								new String[]{Vocabulary.ecrm+Vocabulary.ecrmNames.E41_Appellation, XSDVocabulary.STRING.getIRI().toString()});
+						addObjectPropertyAssertion(model, place.getURI(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString(), objectAppellationURI, 
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Place, null});
+						addDataPropertyAssertion(model, objectAppellationURI, Vocabulary.narra + Vocabulary.narraNames.has_note.toString(), place.getName(), 
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Appellation, XSDVocabulary.STRING.getIRI().toString()});
 						
 
 						
@@ -861,9 +861,9 @@ public class OWLOntologyPopulator {
 								countIdLAU++;
 							}
 						// add the triple E5 Event, P7_took_place_at, SP2 Phenomenal Place
-						addObjectPropertyAssertion(model, eventURI, Vocabulary.ecrm+Vocabulary.ecrmNames.P7_took_place_at.toString(),
+						addObjectPropertyAssertion(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.took_place_at.toString(),
 						IRI_polygon, 
-						new String[]{Vocabulary.ecrm + Vocabulary.ecrmNames.E5_Event.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
 
 						// add the triple SP5_Geometric_Place_Expression, Q9_is_expressed_in_terms_of, SP4_Spatial_Coordinate_Reference_System
 						addObjectPropertyAssertion(model, IRI_polygon_geometry, 

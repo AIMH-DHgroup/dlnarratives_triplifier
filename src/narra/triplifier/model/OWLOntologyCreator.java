@@ -153,6 +153,20 @@ public class OWLOntologyCreator {
 			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E21_Person.toString(),Vocabulary.narra + Vocabulary.narraNames.Person.toString());
 			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E67_Birth.toString(),Vocabulary.narra + Vocabulary.narraNames.Birth.toString());
 			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E19_Physical_Object.toString(),Vocabulary.narra + Vocabulary.narraNames.Physical_Object.toString());
+
+			// CRM Object Properties
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P1_is_identified_by.toString(), Vocabulary.narra + Vocabulary.narraNames.is_identified_by.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P14_carried_out_by.toString(), Vocabulary.narra + Vocabulary.narraNames.carried_out_by.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P3_has_note.toString(), Vocabulary.narra + Vocabulary.narraNames.has_note.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P4_has_time_span.toString(), Vocabulary.narra + Vocabulary.narraNames.has_time_span.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P12_occurred_in_the_presence_of.toString(), Vocabulary.narra + Vocabulary.narraNames.occurred_in_the_presence_of.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P67_refers_to.toString(), Vocabulary.narra + Vocabulary.narraNames.refers_to.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P94_has_created.toString(), Vocabulary.narra + Vocabulary.narraNames.has_created.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P48_has_preferred_identifier.toString(), Vocabulary.narra + Vocabulary.narraNames.has_preferred_identifier.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P106_is_composed_of.toString(), Vocabulary.narra + Vocabulary.narraNames.is_composed_of.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P7_took_place_at.toString(), Vocabulary.narra + Vocabulary.narraNames.took_place_at.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P9_consists_of.toString(), Vocabulary.narra + Vocabulary.narraNames.consists_of.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.P129_is_about.toString(), Vocabulary.narra + Vocabulary.narraNames.is_about.toString());
 			
 			
 			// CRMinf classes
