@@ -1,5 +1,6 @@
 package narra.triplifier.resource;
 
+import org.apache.jena.sparql.function.library.e;
 import org.apache.jena.sparql.util.Symbol;
 
 /**
@@ -59,7 +60,7 @@ public class Vocabulary {
 		// Equivalent classes to EFRBRoo terms
 		Expression_Fragment, Individual_Work,
 		// Equivalent class to CRMgeo terms
-		Phenomenal_Place, Spatial_Coordinate_Reference_System, Geometric_Place_Expression,
+		Phenomenal_Place, Spatial_Coordinate_Reference_System, Reference_Space, Geometric_Place_Expression, is_expressed_in_terms_of, describes, defined_in,
 		// Equivalent properties to GeoSPARQL terms
 		SpatialObject, Feature, Geometry,
 		hasGeometry, hasDefaultGeometry, hasSerialization, asWKT, asGML, sfContains, sfWithin, hasBoundingBox, hasCentroid,

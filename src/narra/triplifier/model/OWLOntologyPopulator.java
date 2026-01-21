@@ -126,12 +126,11 @@ public class OWLOntologyPopulator {
 	public void populateOntology(OWLOntology model, Narrative narrative) {
 		
 		// CIDOC CRM event types
-		eventTypes.put("creation",     Vocabulary.ecrm + Vocabulary.ecrmNames.E65_Creation.toString());
-		eventTypes.put("birth",        Vocabulary.ecrm + Vocabulary.ecrmNames.E67_Birth.toString());
-		eventTypes.put("death",        Vocabulary.ecrm + Vocabulary.ecrmNames.E69_Death.toString());
-		eventTypes.put("joining",      Vocabulary.ecrm + Vocabulary.ecrmNames.E85_Joining.toString());
-		eventTypes.put("leaving",      Vocabulary.ecrm + Vocabulary.ecrmNames.E86_Leaving.toString());
-
+		eventTypes.put("creation",     Vocabulary.narra + Vocabulary.narraNames.Creation.toString());
+		eventTypes.put("birth",        Vocabulary.narra + Vocabulary.narraNames.Birth.toString());
+		eventTypes.put("death",        Vocabulary.narra + Vocabulary.narraNames.Death.toString());
+		eventTypes.put("joining",      Vocabulary.narra + Vocabulary.narraNames.Joining.toString());
+		eventTypes.put("leaving",      Vocabulary.narra + Vocabulary.narraNames.Leaving.toString());
 		// Wikidata event types
 		eventTypes.put("baptism",      Vocabulary.wikidata + "Q35856");
 		eventTypes.put("battle",       Vocabulary.wikidata + "Q178561");
@@ -321,44 +320,44 @@ public class OWLOntologyPopulator {
 					// add the triple E5 Event, P7_took_place_at, SP2 Phenomenal Place
 					addObjectPropertyAssertion(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.took_place_at.toString(),
 					Vocabulary.base  + "phenomenal_place/" + eventLatitude + "_" + eventLongitude, 
-					new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
+					new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString()});
 			
 					// add the triple SP5_Geometric_Place_Expression, Q9_is_expressed_in_terms_of, SP4_Spatial_Coordinate_Reference_System
 					addObjectPropertyAssertion(model, Vocabulary.base  + "place/" + eventLatitude + "_" + eventLongitude, 
-							Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q9_is_expressed_in_terms_of.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.is_expressed_in_terms_of.toString(),
 							"http://www.opengis.net/def/crs/OGC/1.3/CRS84", 
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(),Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString()});
 					
 					// add the triple SP5_Geometric_Place_Expression, asWKT, WktLiteral
 					addDataPropertyAssertion(model, Vocabulary.base  + "place/" + eventLatitude + "_" + eventLongitude, 
-						Vocabulary.geo+Vocabulary.geoNames.asWKT.toString(), 
+						Vocabulary.narra + Vocabulary.narraNames.asWKT.toString(), 
 						"<http://www.opengis.net/def/crs/OGC/1.3/CRS84> "+"POINT(" + eventLongitude + " " + eventLatitude + ")" , 
-						new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#wktLiteral"});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#wktLiteral"});
 					
 					// add the triple SP5_Geometric_Place_Expression, asGML, GMLLiteral
 					addDataPropertyAssertion(model, Vocabulary.base  + "place/" + eventLatitude + "_" + eventLongitude, 
-						Vocabulary.geo+Vocabulary.geoNames.asGML.toString(), 
+						Vocabulary.narra + Vocabulary.narraNames.asGML.toString(), 
 						WKTToGML("POINT(" + eventLongitude + " " + eventLatitude + ")") , 
-						new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#gmlLiteral"});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#gmlLiteral"});
 
 						
 					// add the triple SP4 Spatial Coordinate Reference System, Q7 describes, SP3 Reference Space
 					addObjectPropertyAssertion(model, "http://www.opengis.net/def/crs/OGC/1.3/CRS84",  
-						Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q7_describes.toString(),
+						Vocabulary.narra + Vocabulary.narraNames.describes.toString(),
 						Vocabulary.wikidata + "Q17295", 
-						new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP3_Reference_Space.toString()});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString(),Vocabulary.narra + Vocabulary.narraNames.Reference_Space.toString()});
 					
 					// add the triple SP2 Phenomenal Place, has geometry, SP5_Geometric_Place_Expression
 					addObjectPropertyAssertion(model, Vocabulary.base  + "phenomenal_place/" + eventLatitude + "_" + eventLongitude, 
-						Vocabulary.geo + Vocabulary.geoNames.hasGeometry.toString(),
+						Vocabulary.narra + Vocabulary.narraNames.hasGeometry.toString(),
 						Vocabulary.base + "place/" +  eventLatitude + "_" + eventLongitude,
-						new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString()});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString(),Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString()});
 
 					// add the triple SP2 Phenomenal Place, has default geometry, SP5_Geometric_Place_Expression
 					addObjectPropertyAssertion(model, Vocabulary.base  + "phenomenal_place/" + eventLatitude + "_" + eventLongitude, 
-						Vocabulary.geo + Vocabulary.geoNames.hasDefaultGeometry.toString(),
+						Vocabulary.narra + Vocabulary.narraNames.hasDefaultGeometry.toString(),
 						Vocabulary.base + "place/" +  eventLatitude + "_" + eventLongitude,
-						new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString()});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString(),Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString()});
 
 				}
 				
@@ -432,12 +431,12 @@ public class OWLOntologyPopulator {
 				
 					String timeSpan = Vocabulary.base + "time/" + startDate + "-" + endDate;
 					String timeSpanType = Vocabulary.narra + Vocabulary.narraNames.Time_Span;
-					String instantType = Vocabulary.time + Vocabulary.timeNames.Instant;
+					String instantType = Vocabulary.narra + Vocabulary.narraNames.Instant;
 					
 					// Create beginning/end instants for time span, and add relations between time instants and date literals
-					addDataPropertyAssertion(model, Vocabulary.base + "time/" + startDate, Vocabulary.time+Vocabulary.timeNames.inXSDDate.toString(), 
+					addDataPropertyAssertion(model, Vocabulary.base + "time/" + startDate, Vocabulary.narra + Vocabulary.narraNames.inXSDDate.toString(), 
 					startDate, new String[]{instantType, XSDVocabulary.DATE.getIRI().toString()});
-					addDataPropertyAssertion(model, Vocabulary.base + "time/" + endDate, Vocabulary.time+Vocabulary.timeNames.inXSDDate.toString(), 
+					addDataPropertyAssertion(model, Vocabulary.base + "time/" + endDate, Vocabulary.narra + Vocabulary.narraNames.inXSDDate.toString(), 
 					endDate, new String[]{instantType, XSDVocabulary.DATE.getIRI().toString()});
 	
 					// Add relations between time span and its beginning/end instants
@@ -509,13 +508,13 @@ public class OWLOntologyPopulator {
 
 						addObjectPropertyAssertion(model, propositionURI, Vocabulary.narra+Vocabulary.narraNames.propSubject.toString(), eventURI, new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition, eventTypeURI});
 						addObjectPropertyAssertion(model, propositionSetURI, Vocabulary.narra + Vocabulary.narraNames.is_composed_of.toString(), propositionURI, 
-								new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I4_Proposition_Set, Vocabulary.narra + Vocabulary.narraNames.Proposition});
-						addObjectPropertyAssertion(model, propositionBeliefURI, Vocabulary.crminf+Vocabulary.crminfNames.J4_that.toString(), propositionSetURI,
-								new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I2_Belief, null});
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Proposition_Set, Vocabulary.narra + Vocabulary.narraNames.Proposition});
+						addObjectPropertyAssertion(model, propositionBeliefURI, Vocabulary.narra + Vocabulary.narraNames.that.toString(), propositionSetURI,
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Belief, null});
 							
 						// The narrator needs to be linked to his/her belief
 						addObjectPropertyAssertion(model, resource_Narrator, Vocabulary.narra+Vocabulary.narraNames.holdsBelief.toString(), propositionBeliefURI,
-								new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I2_Belief, null});
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Belief, null});
 						
 						log.debug(resourceType);
 
@@ -729,20 +728,20 @@ public class OWLOntologyPopulator {
 									
 									String premiseBeliefURI = eventURI + "/premise-belief/" + (i + 1);
 									String inferenceMakingURI = eventURI + "/inference-making/" + (i + 1);
-									addObjectPropertyAssertion(model, inferenceMakingURI, Vocabulary.crminf+Vocabulary.crminfNames.J2_concluded_that.toString(), premiseBeliefURI,
-											new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I5_Inference_Making, null});
-									addObjectPropertyAssertion(model, premiseBeliefURI, Vocabulary.crminf+Vocabulary.crminfNames.J1_was_premise_for.toString(), inferenceMakingURI,
-											new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I2_Belief, null});
+									addObjectPropertyAssertion(model, inferenceMakingURI, Vocabulary.narra + Vocabulary.narraNames.concluded_that.toString(), premiseBeliefURI,
+											new String[]{Vocabulary.narra + Vocabulary.narraNames.Inference_Making, null});
+									addObjectPropertyAssertion(model, premiseBeliefURI, Vocabulary.narra + Vocabulary.narraNames.was_premise_for.toString(), inferenceMakingURI,
+											new String[]{Vocabulary.narra + Vocabulary.narraNames.Belief, null});
 									addObjectPropertyAssertion(model, resource_Narrator, Vocabulary.narra+Vocabulary.narraNames.holdsBelief.toString(), premiseBeliefURI,
-											new String[]{Vocabulary.crminf+Vocabulary.crminfNames.I2_Belief, null});
+											new String[]{Vocabulary.narra + Vocabulary.narraNames.Belief, null});
 
-									addObjectPropertyAssertion(model, premiseBeliefURI, Vocabulary.crminf+Vocabulary.crminfNames.J4_that.toString(), observedPropositionSetURI, 
-											new String[]{null, Vocabulary.crminf + Vocabulary.crminfNames.I4_Proposition_Set});
+									addObjectPropertyAssertion(model, premiseBeliefURI, Vocabulary.narra + Vocabulary.narraNames.that.toString(), observedPropositionSetURI, 
+											new String[]{null, Vocabulary.narra + Vocabulary.narraNames.Proposition_Set});
 									
-									addObjectPropertyAssertion(model, observationURI, Vocabulary.crmsci+Vocabulary.crmsciNames.O16_observed_value.toString(), observedPropositionSetURI, 
-											new String[]{Vocabulary.crmsci + Vocabulary.crmsciNames.O8_observed, null});
+									addObjectPropertyAssertion(model, observationURI, Vocabulary.narra + Vocabulary.narraNames.observed_value.toString(), observedPropositionSetURI, 
+											new String[]{Vocabulary.narra + Vocabulary.narraNames.Observation, null});
 									
-									addObjectPropertyAssertion(model, observationURI, Vocabulary.crmsci+Vocabulary.crmsciNames.O8_observed.toString(), sourceURI, new String[]{null, null});
+									addObjectPropertyAssertion(model, observationURI, Vocabulary.narra + Vocabulary.narraNames.observed_value.toString(), sourceURI, new String[]{null, null});
 
 									addObjectPropertyAssertion(model, observationURI, Vocabulary.narra + Vocabulary.narraNames.carried_out_by.toString(), resource_Narrator, new String[]{null, null});
 
@@ -755,16 +754,16 @@ public class OWLOntologyPopulator {
 									String textFragmentURI = sourceURI + "/text-fragment/" + fragmentID;
 									
 									if (textFragment != null) {
-										addDataPropertyAssertion(model, textFragmentURI, Vocabulary.cnt+Vocabulary.cntNames.chars.toString(), textFragment, 
-												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, XSDVocabulary.STRING.getIRI().toString()});
+										addDataPropertyAssertion(model, textFragmentURI, Vocabulary.narra + Vocabulary.narraNames.chars.toString(), textFragment, 
+												new String[]{Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment, XSDVocabulary.STRING.getIRI().toString()});
 										log.debug(sourceURI + "/text/" + fragmentID);
 
-										addObjectPropertyAssertion(model, textFragmentURI, RDF.TYPE.toString(), Vocabulary.cnt+Vocabulary.cntNames.ContentAsText.toString(), 
-												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, null});
+										addObjectPropertyAssertion(model, textFragmentURI, RDF.TYPE.toString(), Vocabulary.narra + Vocabulary.narraNames.ContentAsText.toString(), 
+												new String[]{Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment, null});
 										addObjectPropertyAssertion(model, textFragmentURI, RDF.TYPE.toString(), DCTypeText,
-												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, null});
+												new String[]{Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment, null});
 										addDataPropertyAssertion(model, textFragmentURI, DC.FORMAT.toString(), "text/plain",
-												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, XSDVocabulary.STRING.getIRI().toString()});										
+												new String[]{Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment, XSDVocabulary.STRING.getIRI().toString()});										
 										addObjectPropertyAssertion(model, sourceURI, Vocabulary.narra + Vocabulary.narraNames.is_composed_of.toString(), textFragmentURI, new String[]{null, null});
 										
 										// If source is secondary...
@@ -788,14 +787,14 @@ public class OWLOntologyPopulator {
 									if (referenceFragment != null) {
 										String referenceFragmentURI = sourceURI + "/reference-fragment/" + fragmentID;
 										log.debug(sourceURI + "/reference-fragment/" + fragmentID);
-										addObjectPropertyAssertion(model, referenceFragmentURI, RDF.TYPE.toString(), Vocabulary.cnt+Vocabulary.cntNames.ContentAsText.toString(), 
-												new String[]{Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment, null});
+										addObjectPropertyAssertion(model, referenceFragmentURI, RDF.TYPE.toString(), Vocabulary.narra + Vocabulary.narraNames.ContentAsText.toString(), 
+												new String[]{Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment, null});
 										addObjectPropertyAssertion(model, referenceFragmentURI, RDF.TYPE.toString(), DCTypeText, new String[]{null, null});
 										addDataPropertyAssertion(model, referenceFragmentURI, DC.FORMAT.toString(), "text/plain", new String[]{null, XSDVocabulary.STRING.getIRI().toString()});
 										if (textFragment != null) {
 											addObjectPropertyAssertion(model, textFragmentURI, Vocabulary.narra+Vocabulary.narraNames.hasReference.toString(), referenceFragmentURI, new String[]{null, null});
 										}
-										addDataPropertyAssertion(model, referenceFragmentURI, Vocabulary.cnt+Vocabulary.cntNames.chars.toString(), referenceFragment, 
+										addDataPropertyAssertion(model, referenceFragmentURI, Vocabulary.narra + Vocabulary.narraNames.chars.toString(), referenceFragment, 
 												new String[]{null, XSDVocabulary.STRING.getIRI().toString()});
 										// Increment fragment ID
 										fragmentID++;
@@ -863,43 +862,43 @@ public class OWLOntologyPopulator {
 						// add the triple E5 Event, P7_took_place_at, SP2 Phenomenal Place
 						addObjectPropertyAssertion(model, eventURI, Vocabulary.narra + Vocabulary.narraNames.took_place_at.toString(),
 						IRI_polygon, 
-						new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Event.toString(),Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString()});
 
 						// add the triple SP5_Geometric_Place_Expression, Q9_is_expressed_in_terms_of, SP4_Spatial_Coordinate_Reference_System
 						addObjectPropertyAssertion(model, IRI_polygon_geometry, 
-								Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q9_is_expressed_in_terms_of.toString(),
+								Vocabulary.narra + Vocabulary.narraNames.is_expressed_in_terms_of.toString(),
 								"http://www.opengis.net/def/crs/OGC/1.3/CRS84", 
-								new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString()});
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(),Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString()});
 						
 						// add the triple SP5_Geometric_Place_Expression, asWKT, WktLiteral
 						addDataPropertyAssertion(model, IRI_polygon_geometry, 
-							Vocabulary.geo+Vocabulary.geoNames.asWKT.toString(), 
+							Vocabulary.narra + Vocabulary.narraNames.asWKT.toString(), 
 							"<http://www.opengis.net/def/crs/OGC/1.3/CRS84> "+ eventPolygon, 
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#wktLiteral"});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#wktLiteral"});
 
 						// add the triple SP5_Geometric_Place_Expression, asGML, gmlLiteral
 						addDataPropertyAssertion(model, IRI_polygon_geometry, 
-							Vocabulary.geo+Vocabulary.geoNames.asGML.toString(), 
+							Vocabulary.narra + Vocabulary.narraNames.asGML.toString(), 
 							WKTToGML(eventPolygon), 
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#gmlLiteral"});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#gmlLiteral"});
 
 						// add the triple SP4 Spatial Coordinate Reference System, Q7 describes, SP3 Reference Space
 						addObjectPropertyAssertion(model, "http://www.opengis.net/def/crs/OGC/1.3/CRS84",  
-							Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q7_describes.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.describes.toString(),
 							Vocabulary.wikidata + "Q17295", 
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP3_Reference_Space.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString(),Vocabulary.narra + Vocabulary.narraNames.Reference_Space.toString()});
 						
 						// add the triple SP2 Phenomenal Place, has geometry, SP5_Geometric_Place_Expression
 						addObjectPropertyAssertion(model, IRI_polygon, 
-							Vocabulary.geo + Vocabulary.geoNames.hasGeometry.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.hasGeometry.toString(),
 							IRI_polygon_geometry,
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString(),Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString()});
 
 						// add the triple SP2 Phenomenal Place, has default geometry, SP5_Geometric_Place_Expression
 						addObjectPropertyAssertion(model, IRI_polygon, 
-							Vocabulary.geo + Vocabulary.geoNames.hasDefaultGeometry.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.hasDefaultGeometry.toString(),
 							IRI_polygon_geometry,
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString(),Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString()});
 
 
 					}
@@ -920,44 +919,44 @@ public class OWLOntologyPopulator {
 						}
 						
 
-						addObjectPropertyAssertion(model, resource_Narrative,Vocabulary.narra+Vocabulary.narraNames.isAboutLAU.toString(), IRI_LAUPlace, new String[]{Vocabulary.narraNames.Narrative.toString(),  Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString()});
+						addObjectPropertyAssertion(model, resource_Narrative,Vocabulary.narra+Vocabulary.narraNames.isAboutLAU.toString(), IRI_LAUPlace, new String[]{Vocabulary.narraNames.Narrative.toString(),  Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString()});
 						
 						// add the triple SP5_Geometric_Place_Expression, Q9_is_expressed_in_terms_of, SP4_Spatial_Coordinate_Reference_System
 						addObjectPropertyAssertion(model, IRI_LAUGeometry, 
-								Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q9_is_expressed_in_terms_of.toString(),
+								Vocabulary.narra + Vocabulary.narraNames.is_expressed_in_terms_of.toString(),
 								"http://www.opengis.net/def/crs/OGC/1.3/CRS84", 
-								new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString()});
+								new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(),Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString()});
 						
 						// add the triple SP5_Geometric_Place_Expression, asWKT, WktLiteral
 						addDataPropertyAssertion(model, IRI_LAUGeometry, 
-							Vocabulary.geo+Vocabulary.geoNames.asWKT.toString(), 
+							Vocabulary.narra + Vocabulary.narraNames.asWKT.toString(), 
 							"<http://www.opengis.net/def/crs/OGC/1.3/CRS84> "+ narrative.getPlace(), 
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#wktLiteral"});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#wktLiteral"});
 						
 						// add the triple SP5_Geometric_Place_Expression, asGML, gmlLiteral
 						addDataPropertyAssertion(model, IRI_LAUGeometry, 
-						Vocabulary.geo+Vocabulary.geoNames.asGML.toString(), 
+						Vocabulary.narra + Vocabulary.narraNames.asGML.toString(), 
 						WKTToGML(narrative.getPlace()), 
-						new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#gmlLiteral"});
+						new String[]{Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString(), "http://www.opengis.net/ont/geosparql#gmlLiteral"});
 						
 							
 						// add the triple SP4 Spatial Coordinate Reference System, Q7 describes, SP3 Reference Space
 						addObjectPropertyAssertion(model, "http://www.opengis.net/def/crs/OGC/1.3/CRS84",  
-							Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q7_describes.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.describes.toString(),
 							Vocabulary.wikidata + "Q17295", 
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP3_Reference_Space.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString(),Vocabulary.narra + Vocabulary.narraNames.Reference_Space.toString()});
 						
 						// add the triple SP2 Phenomenal Place, has geometry, SP5_Geometric_Place_Expression
 						addObjectPropertyAssertion(model, IRI_LAUPlace, 
-							Vocabulary.geo + Vocabulary.geoNames.hasGeometry.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.hasGeometry.toString(),
 							IRI_LAUGeometry,
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString(),Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString()});
 
 						// add the triple SP2 Phenomenal Place, has default geometry, SP5_Geometric_Place_Expression
 						addObjectPropertyAssertion(model, IRI_LAUPlace, 
-							Vocabulary.geo + Vocabulary.geoNames.hasDefaultGeometry.toString(),
+							Vocabulary.narra + Vocabulary.narraNames.hasDefaultGeometry.toString(),
 							IRI_LAUGeometry,
-							new String[]{Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(),Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString()});
+							new String[]{Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString(),Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString()});
 
 				
 

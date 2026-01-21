@@ -245,6 +245,22 @@ public class OWLOntologyCreator {
 				Vocabulary.narra + Vocabulary.narraNames.Conceptual_Object.toString(),
 				"This class represents a conceptual object. Equivalent to the CRM class E28 Conceptual Object."
 			);
+			createClassWithDescription(
+				Vocabulary.narra + Vocabulary.narraNames.Birth.toString(),
+				"This class represents a birth. Equivalent to the CRM class E67 Birth."
+			);
+			createClassWithDescription(
+				Vocabulary.narra + Vocabulary.narraNames.Death.toString(),
+				"This class represents a death. Equivalent to the CRM class E69 Death."
+			);
+			createClassWithDescription(
+				Vocabulary.narra + Vocabulary.narraNames.Joining.toString(),
+				"This class represents a joining. Equivalent to the CRM class E85 Joining."
+			);
+			createClassWithDescription(
+				Vocabulary.narra + Vocabulary.narraNames.Leaving.toString(),
+				"This class represents a leaving. Equivalent to the CRM class E86 Leaving."
+			);
 
 			
 			// CRMinf classes
@@ -774,6 +790,10 @@ public class OWLOntologyCreator {
 			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E28_Conceptual_Object.toString(),Vocabulary.narra + Vocabulary.narraNames.Conceptual_Object.toString());
 			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E42_Identifier.toString(),Vocabulary.narra + Vocabulary.narraNames.Identifier.toString());
 			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E90_Symbolic_Object.toString(),Vocabulary.narra + Vocabulary.narraNames.Symbolic_Object.toString());
+			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E67_Birth.toString(), Vocabulary.narra + Vocabulary.narraNames.Birth.toString());
+			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E69_Death.toString(), Vocabulary.narra + Vocabulary.narraNames.Death.toString());
+			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E85_Joining.toString(), Vocabulary.narra + Vocabulary.narraNames.Joining.toString());
+			addEquivalentClassAxiom(Vocabulary.ecrm + Vocabulary.ecrmNames.E86_Leaving.toString(), Vocabulary.narra + Vocabulary.narraNames.Leaving.toString());
 
 			// Equivalence axioms between CRMinf and CRMsci classes and narra classes
 			addEquivalentClassAxiom(Vocabulary.crmsci + Vocabulary.crmsciNames.S15_Observable_Entity.toString(), Vocabulary.narra + Vocabulary.narraNames.Observable_Entity.toString());
@@ -789,6 +809,7 @@ public class OWLOntologyCreator {
 			addEquivalentClassAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(), Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString());
 			addEquivalentClassAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP4_Spatial_Coordinate_Reference_System.toString(), Vocabulary.narra + Vocabulary.narraNames.Spatial_Coordinate_Reference_System.toString());
 			addEquivalentClassAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP5_Geometric_Place_Expression.toString(), Vocabulary.narra + Vocabulary.narraNames.Geometric_Place_Expression.toString());
+			addEquivalentClassAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP3_Reference_Space.toString(), Vocabulary.narra + Vocabulary.narraNames.Reference_Space.toString());
 
 			// Equivalence axioms between Time Ontology in OWL classes and narra classes
 			addEquivalentClassAxiom(Vocabulary.time + Vocabulary.timeNames.Instant.toString(), Vocabulary.narra + Vocabulary.narraNames.Instant.toString());
@@ -818,6 +839,11 @@ public class OWLOntologyCreator {
 			addEquivalentObjectPropertyAxiom(Vocabulary.crminf + Vocabulary.crminfNames.J2_concluded_that.toString(), Vocabulary.narra + Vocabulary.narraNames.concluded_that.toString());
 			addEquivalentObjectPropertyAxiom(Vocabulary.crminf + Vocabulary.crminfNames.J4_that.toString(), Vocabulary.narra + Vocabulary.narraNames.that.toString());
 
+			// CRMgeo Object Properties
+			addEquivalentObjectPropertyAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q7_describes.toString(), Vocabulary.narra + Vocabulary.narraNames.describes.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q5_defined_in.toString(), Vocabulary.narra + Vocabulary.narraNames.defined_in.toString());
+			addEquivalentObjectPropertyAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.Q9_is_expressed_in_terms_of.toString(), Vocabulary.narra + Vocabulary.narraNames.is_expressed_in_terms_of.toString());
+
 			// GeoSPARQL Object Properties		
 			addEquivalentObjectPropertyAxiom(Vocabulary.geo + Vocabulary.geoNames.hasGeometry.toString(), Vocabulary.narra + Vocabulary.narraNames.hasGeometry.toString());
 			addEquivalentObjectPropertyAxiom(Vocabulary.geo + Vocabulary.geoNames.hasDefaultGeometry.toString(), Vocabulary.narra + Vocabulary.narraNames.hasDefaultGeometry.toString());
@@ -828,6 +854,7 @@ public class OWLOntologyCreator {
 			// Time Ontology in OWL Object Properties
 			addEquivalentDataPropertyAxiom(Vocabulary.time + Vocabulary.timeNames.before.toString(), Vocabulary.narra + Vocabulary.narraNames.before.toString());
 			addEquivalentDataPropertyAxiom(Vocabulary.time + Vocabulary.timeNames.after.toString(), Vocabulary.narra + Vocabulary.narraNames.after.toString());
+			addEquivalentDataPropertyAxiom(Vocabulary.time + Vocabulary.timeNames.inXSDDate.toString(), Vocabulary.narra + Vocabulary.narraNames.inXSDDate.toString());
 
 			// CNT Data Properties
 			addEquivalentDataPropertyAxiom(Vocabulary.cnt + Vocabulary.cntNames.chars.toString(), Vocabulary.narra + Vocabulary.narraNames.chars.toString());
