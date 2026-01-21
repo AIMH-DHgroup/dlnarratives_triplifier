@@ -1,5 +1,7 @@
 package narra.triplifier.resource;
 
+import org.apache.jena.sparql.util.Symbol;
+
 /**
  * a class to represent the used vocabulary
  */
@@ -11,7 +13,8 @@ public class Vocabulary {
 	public static final String cnt = "http://www.w3.org/2011/content#";
 	public static final String ecrm = "http://erlangen-crm.org/current/";
 	public static final String crminf = "https://dlnarratives.eu/crminf/";
-	public static final String crmgeo = "https://dlnarratives.eu/crmgeo/";
+	// public static final String crmgeo = "https://dlnarratives.eu/crmgeo/"; //OLD
+	public static final String crmgeo = "http://www.ics.forth.gr/isl/CRMgeo/";
 	public static final String crmsci = "http://www.ics.forth.gr/isl/CRMsci/";
 	public static final String dc = "http://purl.org/dc/elements/1.1/";
 	public static final String dctypes = "http://purl.org/dc/dcmitype/";
@@ -36,7 +39,7 @@ public class Vocabulary {
 		P67_refers_to, P1_is_identified_by,
 		E52_Time_Span { public String toString() { return "E52_Time-Span"; }}, // Java does not accept dash (-) in enum name
 		P4_has_time_span { public String toString() { return "P4_has_time-span"; }} // Java does not accept dash (-) in enum name
-		, E94_Space_primitive, P168_place_is_defined_by, P48_has_preferred_identifier, P161_has_spatial_projection, E36_Visual_Item
+		, E94_Space_Primitive, P168_place_is_defined_by, P48_has_preferred_identifier, P161_has_spatial_projection, E36_Visual_Item
 
 	}
 	
@@ -47,18 +50,23 @@ public class Vocabulary {
 		hasFabula, hasEvent, hasText, Narrative, Narration, Biography, Fabula, partOfNarrative, Role, propSubject, propObject,
 		propPredicate, Proposition, holdsBelief, hasEntity, isEntityOf, hasDescription, isAboutCountry, isAboutLAU, isPresentedBefore, isPresentedAfter, is_about,
 		// NICO ADD isAboutCountry, isAboutLAU 
-		// Equivalent classes to CIDOC CRM classes
-		Entity, Appellation, Activity, Creation, Actor, Place, Physical_Thing, Information_Object, Persistent_Item, Space_primitive, Visual_Item, Time_Span { public String toString() { return "Time-Span"; }},
-		Person, Birth, Physical_Object, Propositional_Object, Death, Joining, Leaving, Period,
-		// Equivalent properties to CIDOC CRM properties
+		// Equivalent terms to CIDOC CRM 
+		Entity, Appellation, Activity, Creation, Actor, Place, Physical_Thing, Information_Object, Persistent_Item, Space_Primitive, Visual_Item, Time_Span { public String toString() { return "Time-Span"; }},
+		Person, Birth, Physical_Object, Propositional_Object, Death, Joining, Leaving, Period, Conceptual_Object, Design_or_Procedure, Identifier, Symbolic_Object,
 		is_identified_by, has_time_span { public String toString() { return "has_time-span"; }}, carried_out_by, took_place_at, occurred_in_the_presence_of, refers_to, has_created, is_composed_of, consists_of, has_preferred_identifier, has_note,
-		// NICO ADD has_spatial_projection
-		// Equivalent classes to CRMinf classes
-		Observable_Entity, Observation, Belief, Inference_Making, Proposition_Set,
-		// Equivalent classes to EFRBRoo classes
+		// Equivalent classes to CRMinf and CRMsci terms
+		Observable_Entity, Observation, Belief, Inference_Making, Proposition_Set, observed, observed_value, was_premise_for, concluded_that, that,
+		// Equivalent classes to EFRBRoo terms
 		Expression_Fragment, Individual_Work,
-		// Equivalent class to CRMgeo class
-		Phenomenal_Place, Spatial_Coordinate_Reference_System, Geometric_Place_Expression
+		// Equivalent class to CRMgeo terms
+		Phenomenal_Place, Spatial_Coordinate_Reference_System, Geometric_Place_Expression,
+		// Equivalent properties to GeoSPARQL terms
+		SpatialObject, Feature, Geometry,
+		hasGeometry, hasDefaultGeometry, hasSerialization, asWKT, asGML, sfContains, sfWithin, hasBoundingBox, hasCentroid,
+		// Equivalent classes to Time Ontology terms
+		Instant, before, after, inXSDDate,
+		// Equivalent properties to CNT terms
+		ContentAsText, chars
 	}
 	
 	// CRMinf names
