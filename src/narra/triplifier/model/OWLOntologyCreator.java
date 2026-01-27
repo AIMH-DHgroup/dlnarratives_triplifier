@@ -27,6 +27,7 @@ import org.semanticweb.owlapi.vocab.XSDVocabulary;
 import org.apache.jena.vocabulary.OWL;
 
 import narra.triplifier.resource.Vocabulary;
+import narra.triplifier.resource.Work;
 import narra.triplifier.util.Log4JClass;
 import uk.ac.manchester.cs.owl.owlapi.OWLAnnotationPropertyImpl;
 import uk.ac.manchester.cs.owl.owlapi.OWLDatatypeImpl;
@@ -121,7 +122,7 @@ public class OWLOntologyCreator {
 				Vocabulary.narra + Vocabulary.narraNames.Narration.toString(),
 				"This class represents the narration of a narrative, i.e. an individual work"
 				+ " that tells the events of the narrative through some form of media (text, video, audio, etc.).",
-				Vocabulary.narra + Vocabulary.narraNames.Individual_Work.toString()
+				Vocabulary.narra + Vocabulary.narraNames.Work.toString()
 			);
 			
 			// Class narra:Biography
@@ -360,21 +361,30 @@ public class OWLOntologyCreator {
 			
 			// EFRBRoo classes
 			createClassWithDescription(
-				Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment.toString(), 
-				"This class comprises parts of Expressions and these parts are not Self-Contained Expressions themselves." + 
-				"The existence of an instance of F23 Expression Fragment can be due to accident, such as loss of material over time, " +
-				"e.g. the only remaining manuscript of an antique text being partially eaten by worms, or due to deliberate isolation, " +
-				"such as excerpts taken from a text by the compiler of a collection of excerpts.\n" +
-				"An F23 Expression Fragment is only identified with respect to its occurrence in a known or assumed whole. \n" +
-				"The size of an instance of F23 Expression Fragment ranges from more than 99% of an instance of " +
-				"F22 Self-Contained Expression to tiny bits (a few words from a text, one bar from a musical composition, " +
-				"one detail from a still image, a two-second clip from a movie, etc.)."
+				Vocabulary.efrbroo + Vocabulary.efrbrooNames.F1_Work.toString(), 
+				"A Work is the outcome of an intellectual process of one or more persons. Inherent to the notion" +
+				"of work is the existence of recognisable realizations of the work in the form of one or more" +
+				"expressions. Works are often regarded as finished and discrete e.g. when declared as such by the" +
+				"creator of the work or based on the elaboration or logical coherence of its content. However," +
+				"works may be recognized as existing but unfinished e.g. if the creators deliberately or" +
+				"accidentally never explicitly finished a particular Expression but have left behind partial" +
+				"expressions. \n" +
+				"In the absence of explicit information about the initial conception, which is rarely available, the" +
+				"first expression created constitutes witness of the beginning of existence of a Work." +
+				"A Work can evolve over time, such as through revised editions. A Work may be elaborated by" +
+				"one or more Actors simultaneously, in parallel, or over time. Additional expressions of a Work" +
+				"can continue to be created over time." +
+				"The boundaries of a Work have nothing to do with the value of the intellectual achievement but" +
+				"only with the dominance of a concept." +
+				"The main purpose of this class is to enable bringing together intellectually equivalent" +
+				"Expressions in order to display to a user all available alternatives of the same intellectual or" +
+				"artistic content."
 			);
 
 			// Equivalent narra classes of EFRBRoo classes
 			createClassWithDescription(
-				Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment.toString(), 
-				"This class represents an expression fragment. Equivalent to the FRBRoo class F23 Expression Fragment."
+				Vocabulary.narra + Vocabulary.narraNames.Work.toString(), 
+				"This class represents a work. Equivalent to the LRMoo class F1 Work."
 			);
 
 
@@ -537,16 +547,23 @@ public class OWLOntologyCreator {
 			// Property narra:hasTextFragment
 			createObjPropertyWithDomainRangeAndDescription(
 				Vocabulary.narra + Vocabulary.narraNames.hasTextFragment.toString(),
-				Vocabulary.narra + Vocabulary.narraNames.Information_Object.toString(),
-				Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment.toString(),
+				Vocabulary.narra + Vocabulary.narraNames.Proposition.toString(), // was Information Object
+				Vocabulary.narra + Vocabulary.narraNames.Symbolic_Object.toString(), // was Expression Fragment
 				"This property relates a proposition with a text fragment."
+			);
+
+			createObjPropertyWithDomainRangeAndDescription(
+				Vocabulary.narra + Vocabulary.narraNames.isTextFragmentOf.toString(),
+				Vocabulary.narra + Vocabulary.narraNames.Symbolic_Object.toString(), 
+				Vocabulary.narra + Vocabulary.narraNames.Proposition.toString(), 
+				"This property relates a text fragment with a proposition."
 			);
 
 			// Property narra:hasReference
 			createObjPropertyWithDomainRangeAndDescription(
 				Vocabulary.narra + Vocabulary.narraNames.hasReference.toString(),
-				Vocabulary.narra + Vocabulary.narraNames.Information_Object.toString(),
-				Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment.toString(),
+				Vocabulary.narra + Vocabulary.narraNames.Symbolic_Object.toString(),
+				Vocabulary.narra + Vocabulary.narraNames.Symbolic_Object.toString(),
 				"This property relates a proposition with a reference fragment."
 				+ "For instance, the reference fragment \"Inferno II, 121\" +"
 				+ "refers to a specific part of the work \"Divine Comedy\"."
@@ -756,7 +773,7 @@ public class OWLOntologyCreator {
 			// Property cnt:chars
 			createDataPropertyWithDomainAndRange(
 				Vocabulary.narra + Vocabulary.narraNames.chars.toString(),
-				Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment.toString(),
+				Vocabulary.narra + Vocabulary.narraNames.Symbolic_Object.toString(),
 				XSDVocabulary.STRING.toString()
 			);
 
@@ -803,7 +820,7 @@ public class OWLOntologyCreator {
 			addEquivalentClassAxiom(Vocabulary.crminf + Vocabulary.crminfNames.I4_Proposition_Set.toString(), Vocabulary.narra + Vocabulary.narraNames.Proposition_Set.toString());
 			
 			// Equivalence axioms between EFRBRoo classes and narra classes
-			addEquivalentClassAxiom(Vocabulary.efrbroo + Vocabulary.efrbrooNames.F23_Expression_Fragment.toString(), Vocabulary.narra + Vocabulary.narraNames.Expression_Fragment.toString());
+			addEquivalentClassAxiom(Vocabulary.efrbroo + Vocabulary.efrbrooNames.F1_Work.toString(), Vocabulary.narra + Vocabulary.narraNames.Work.toString());
 
 			// Equivalence axioms between CRMgeo classes and narra classes
 			addEquivalentClassAxiom(Vocabulary.crmgeo + Vocabulary.crmgeoNames.SP2_Phenomenal_Place.toString(), Vocabulary.narra + Vocabulary.narraNames.Phenomenal_Place.toString());

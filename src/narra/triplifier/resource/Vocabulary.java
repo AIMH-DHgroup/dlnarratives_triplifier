@@ -49,7 +49,7 @@ public class Vocabulary {
 		ActorWithRole, hadParticipant, hasSubject, hasRole, Event, hasSource, hasBibliographicReference, hasTextFragment,
 		hasReference, causallyDependsOn, numBook, numChapter, instantEquals, timeSpanStartedBy, timeSpanFinishedBy,
 		hasFabula, hasEvent, hasText, Narrative, Narration, Biography, Fabula, partOfNarrative, Role, propSubject, propObject,
-		propPredicate, Proposition, holdsBelief, hasEntity, isEntityOf, hasDescription, isAboutCountry, isAboutLAU, isPresentedBefore, isPresentedAfter, is_about,
+		propPredicate, Proposition, holdsBelief, hasEntity, isEntityOf, hasDescription, isAboutCountry, isAboutLAU, isPresentedBefore, isPresentedAfter, is_about, isTextFragmentOf,
 		// NICO ADD isAboutCountry, isAboutLAU 
 		// Equivalent terms to CIDOC CRM 
 		Entity, Appellation, Activity, Creation, Actor, Place, Physical_Thing, Information_Object, Persistent_Item, Space_Primitive, Visual_Item, Time_Span { public String toString() { return "Time-Span"; }},
@@ -58,7 +58,7 @@ public class Vocabulary {
 		// Equivalent classes to CRMinf and CRMsci terms
 		Observable_Entity, Observation, Belief, Inference_Making, Proposition_Set, observed, observed_value, was_premise_for, concluded_that, that,
 		// Equivalent classes to EFRBRoo terms
-		Expression_Fragment, Individual_Work,
+		Expression_Fragment, Individual_Work, Work,
 		// Equivalent class to CRMgeo terms
 		Phenomenal_Place, Spatial_Coordinate_Reference_System, Reference_Space, Geometric_Place_Expression, is_expressed_in_terms_of, describes, defined_in,
 		// Equivalent properties to GeoSPARQL terms
@@ -100,7 +100,7 @@ public class Vocabulary {
 	public static enum cntNames {ContentAsText, chars}
 		
 	// eFRBRoo names
-	public static enum efrbrooNames {F23_Expression_Fragment, F14_Individual_Work}
+	public static enum efrbrooNames {F23_Expression_Fragment, F14_Individual_Work, F1_Work}
 	
 	
 
